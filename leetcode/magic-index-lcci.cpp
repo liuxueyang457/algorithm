@@ -1,4 +1,4 @@
-// Date: Sun Oct 16 00:46:43 2022
+// Date: Sun Oct 16 01:20:55 2022
 
 #include <bits/stdc++.h>
 
@@ -70,29 +70,17 @@ struct TreeNode {
 
 #endif
 
-/*
- * 面试题 08.06. 汉诺塔问题
- https://leetcode.cn/problems/hanota-lcci/description/
- */
+// 面试题 08.03. 魔术索引
+// https://leetcode.cn/problems/magic-index-lcci/
 class Solution {
 public:
-  void help(int n, VI &a, VI &b, VI &c) {
-    if (!n) return;
-    else if (n == 1) {
-      c.pb(a.back());
-      a.pop_back();
-    } else {
-      help(n - 1, a, c, b);
-
-      c.pb(a.back());
-      a.pop_back();
-
-      help(n - 1, b, a, c);
+  int findMagicIndex(vector<int>& a) {
+    int n = SZ(a);
+    for (int i = 0; i < n;) {
+      if (a[i] == i) return i;
+      i = max(i + 1, a[i]);
     }
-  }
 
-  void hanota(vector<int>& A, vector<int>& B, vector<int>& C) {
-    int n = SZ(A);
-    help(n, A, B, C);
+    return -1;
   }
 };
